@@ -15,15 +15,40 @@ import {
   UnitRow,
   OfficeHour,
 } from './listing.types';
+import { SupabaseClient, User } from '@supabase/supabase-js';
 
 @Injectable()
 export class ListingService {
+  constructor(private readonly supabaseClient: SupabaseClient) {}
+
   private readonly logger = new Logger(ListingService.name);
   private readonly userAgent =
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36';
 
-  async scrapeApartmentData(url: string): Promise<ScrapedData> {
-    this.logger.log(`Starting to scrape apartment data from: ${url}`);
+  async scrapeApartmentData(url: string, user: User): Promise<ScrapedData> {
+    this.logger.log(`Processing apartment data request from: ${url}`);
+
+    const { data: existingListing, error: fetchError } =
+      await this.supabaseClient
+        .from('listings')
+        .select('data')
+        .eq('url', url)
+        .single();
+
+    if (fetchError && fetchError.code !== 'PGRST116') {
+      this.logger.warn('Error checking for existing listing:', fetchError);
+    }
+
+    if (existingListing?.data) {
+      this.logger.log(
+        `Found existing data for URL: ${url}, returning cached data`,
+      );
+      return existingListing.data as ScrapedData;
+    }
+
+    this.logger.log(
+      `No existing data found, starting to scrape apartment data from: ${url}`,
+    );
 
     const browser = await puppeteer.launch({
       headless: true,
@@ -63,6 +88,8 @@ export class ListingService {
         this.logger.warn('Could not scrape fees and policies:', error);
       }
 
+      this.logger.log(`Scraping data for authenticated user: ${user.id}`);
+
       const result: ScrapedData = {
         ...availabilityData,
         contactInfo,
@@ -70,7 +97,22 @@ export class ListingService {
         feesAndPolicies,
       };
 
-      this.logger.log('Successfully completed scraping apartment data');
+      // Save newly scraped data to database
+      const { error: insertError } = await this.supabaseClient
+        .from('listings')
+        .insert({
+          data: result,
+          url: url,
+          requested_by: user.id,
+        });
+
+      if (insertError) {
+        this.logger.warn('Error saving scraped data to database:', insertError);
+      }
+
+      this.logger.log(
+        'Successfully completed scraping and saving apartment data',
+      );
       return result;
     } finally {
       await browser.close();

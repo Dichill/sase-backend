@@ -13,6 +13,8 @@ import {
 } from './listing.types';
 import { AuthGuard } from 'src/guard/AuthGuard';
 import { UseGuards } from '@nestjs/common';
+import { GetUser } from 'src/guard/user.decorator';
+import { User } from '@supabase/supabase-js';
 
 @Controller('listing')
 @UseGuards(AuthGuard)
@@ -24,9 +26,8 @@ export class ListingController {
   @Post('scrape')
   async scrapeApartment(
     @Body() scrapeDto: ScrapeApartmentDto,
+    @GetUser() user: User,
   ): Promise<ScrapeApartmentResponseDto> {
-    this.logger.log(`Received scrape request for URL: ${scrapeDto.url}`);
-
     if (!scrapeDto.url) {
       throw new HttpException('URL is required', HttpStatus.BAD_REQUEST);
     }
@@ -41,6 +42,7 @@ export class ListingController {
     try {
       const scrapedData = await this.listingService.scrapeApartmentData(
         scrapeDto.url,
+        user,
       );
 
       this.logger.log(
