@@ -1,0 +1,1270 @@
+{
+  "propertyName": "The Q De Soto",
+  "propertyAddress": "21010 Erwin St, Woodland Hills, CA 91367",
+  "bedInfo": [
+    {
+      "Monthly Rent": "$2,699 - $6,221View Fees and Policies"
+    },
+    {
+      "Bedrooms": "Studio - 3 bd"
+    },
+    {
+      "Bathrooms": "1 - 2 ba"
+    },
+    {
+      "Square Feet": "588 - 1,726 sq ft"
+    }
+  ],
+  "availability": [
+    {
+      "modelName": "STUDIO",
+      "headlineRent": "$2,699 – $2,907",
+      "details": [
+        "Studio",
+        "1 Bath",
+        "630 Sq Ft"
+      ],
+      "availabilitySummary": "3 Available units",
+      "image": "https://images1.apartments.com/i2/0HZ-5LGyHmbXDWwhw0zbxPtSSO6eFNnNli6HkFJwP20/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "545",
+          "price": "$2,699",
+          "sqft": "630",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "449",
+          "price": "$2,771",
+          "sqft": "630",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "349",
+          "price": "$2,825",
+          "sqft": "630",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "A THREE",
+      "headlineRent": "$2,879 – $3,482",
+      "details": [
+        "1 Bed",
+        "1 Bath",
+        "660 – 758 Sq Ft"
+      ],
+      "availabilitySummary": "4 Available units",
+      "image": "https://images1.apartments.com/i2/_QF0HXEM-UcHp9t5US2Li9SC759MycTi3kC2di2JJ8s/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "522",
+          "price": "$3,135",
+          "sqft": "693",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "516",
+          "price": "$3,135",
+          "sqft": "693",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "566",
+          "price": "$3,155",
+          "sqft": "660",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "618",
+          "price": "$3,174",
+          "sqft": "693",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "A ONE",
+      "headlineRent": "$3,002 – $3,097",
+      "details": [
+        "1 Bed",
+        "1 Bath",
+        "588 Sq Ft"
+      ],
+      "availabilitySummary": "1 Available unit",
+      "image": "https://images1.apartments.com/i2/1ByjDq4BgZy3RUvTJvOiXg2kgAmsXqpCV3h3YFK6aAQ/105/image.jpg?p=1",
+      "units": [
+        {
+          "unit": "PH714",
+          "price": "$3,002",
+          "sqft": "588",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "A FOUR",
+      "headlineRent": "$3,187 – $3,480",
+      "details": [
+        "1 Bed",
+        "1 Bath",
+        "712 – 808 Sq Ft"
+      ],
+      "availabilitySummary": "4 Available units",
+      "image": "https://images1.apartments.com/i2/2yTZLxmYELI4LE8IojB_DHANdYvN0xPtTAdD92LqqBY/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "368",
+          "price": "$3,187",
+          "sqft": "763",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "305",
+          "price": "$3,199",
+          "sqft": "716",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "PH759",
+          "price": "$3,329",
+          "sqft": "712",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "611",
+          "price": "$3,383",
+          "sqft": "716",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "A TWO",
+      "headlineRent": "$3,407 – $3,506",
+      "details": [
+        "1 Bed",
+        "1 Bath",
+        "646 Sq Ft"
+      ],
+      "availabilitySummary": "1 Available unit",
+      "image": "https://images1.apartments.com/i2/QqC2jwtjQPwfF9L3QOtycbV9NrGkakZgTAnHB5KCbig/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "PH702",
+          "price": "$3,407",
+          "sqft": "646",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "A FIVE",
+      "headlineRent": "$3,416 – $3,782",
+      "details": [
+        "1 Bed",
+        "1 Bath",
+        "733 Sq Ft"
+      ],
+      "availabilitySummary": "2 Available units",
+      "image": "https://images1.apartments.com/i2/QXxi-VyFZeRd2RCDOePrTWJRkWYZz1rKk6pheWbqxew/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "534",
+          "price": "$3,416",
+          "sqft": "733",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "PH734",
+          "price": "$3,676",
+          "sqft": "733",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "A SIX",
+      "headlineRent": "$3,567 – $3,670",
+      "details": [
+        "1 Bed",
+        "1 Bath",
+        "838 – 902 Sq Ft"
+      ],
+      "availabilitySummary": "1 Available unit",
+      "image": "https://images1.apartments.com/i2/hf8HMsJ2C1DRdIeP4c4W8MUZ21FPZiJBnhntlGr2fS4/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "206",
+          "price": "$3,567",
+          "sqft": "838",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "A SEVEN",
+      "headlineRent": "$3,670 – $3,851",
+      "details": [
+        "1 Bed",
+        "1 Bath",
+        "855 Sq Ft"
+      ],
+      "availabilitySummary": "4 Available units",
+      "image": "https://images1.apartments.com/i2/XBG9wg41ZOZ7Qa__1nD7S36riYkb8kgkSbyZWBgJphc/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "358",
+          "price": "$3,670",
+          "sqft": "855",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "651",
+          "price": "$3,675",
+          "sqft": "855",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "658",
+          "price": "$3,724",
+          "sqft": "855",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "PH743",
+          "price": "$3,744",
+          "sqft": "855",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "LIVE WORK ONE",
+      "headlineRent": "$4,263 – $4,386",
+      "details": [
+        "1 Bed",
+        "2 Baths",
+        "1,629 Sq Ft"
+      ],
+      "availabilitySummary": "1 Available unit",
+      "image": "https://images1.apartments.com/i2/JMGp0_-C21HE1A2A9HzGdpt0jTvlxLhB3III7_Dg3R0/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "248",
+          "price": "$4,263",
+          "sqft": "1,629",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "LIVE WORK TWO",
+      "headlineRent": "$4,321 – $4,445",
+      "details": [
+        "1 Bed",
+        "2 Baths",
+        "1,424 Sq Ft"
+      ],
+      "availabilitySummary": "2 Available units",
+      "image": "https://images1.apartments.com/i2/J0b5yFKjwid7iCVavlAKc9M2FdNo2yqToDVVcN8w1vg/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "234",
+          "price": "$4,321",
+          "sqft": "1,424",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "238",
+          "price": "$4,321",
+          "sqft": "1,424",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "B ONE",
+      "headlineRent": "$3,988 – $4,390",
+      "details": [
+        "2 Beds",
+        "2 Baths",
+        "983 – 1,028 Sq Ft"
+      ],
+      "availabilitySummary": "4 Available units",
+      "image": "https://images1.apartments.com/i2/hmk6vRIbNixl5xFhCV4birEBy8J7kuuCb2SktB8d0qQ/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "527",
+          "price": "$4,086",
+          "sqft": "983",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "557",
+          "price": "$4,086",
+          "sqft": "983",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "352",
+          "price": "$4,100",
+          "sqft": "983",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "552",
+          "price": "$4,208",
+          "sqft": "983",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "B TWO",
+      "headlineRent": "$4,173 – $5,005",
+      "details": [
+        "2 Beds",
+        "2 Baths",
+        "1,100 – 1,150 Sq Ft"
+      ],
+      "availabilitySummary": "4 Available units",
+      "image": "https://images1.apartments.com/i2/VXR3lIiKuU0VkSUBwvlXYYVkglKgvejWJI1UiF_xgKE/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "555",
+          "price": "$4,561",
+          "sqft": "1,106",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "548",
+          "price": "$4,634",
+          "sqft": "1,106",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "546",
+          "price": "$4,634",
+          "sqft": "1,106",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "444",
+          "price": "$4,669",
+          "sqft": "1,100",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "LIVE WORK FOUR",
+      "headlineRent": "$5,447 – $5,604",
+      "details": [
+        "2 Beds",
+        "2 Baths",
+        "1,379 Sq Ft"
+      ],
+      "availabilitySummary": "1 Available unit",
+      "image": "https://images1.apartments.com/i2/ruHlfQlYnSjaaSACSDSWwkTbTqrMad87QEl4aFywUKI/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "110",
+          "price": "$5,447",
+          "sqft": "1,379",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "LIVE WORK FIVE",
+      "headlineRent": "$5,561 – $5,721",
+      "details": [
+        "2 Beds",
+        "2 Baths",
+        "1,446 Sq Ft"
+      ],
+      "availabilitySummary": "1 Available unit",
+      "image": "https://images1.apartments.com/i2/WPQmVMn0qpWF_jEFZSb9DvOVjNJV-moleqnsEjBYFyQ/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "108",
+          "price": "$5,561",
+          "sqft": "1,446",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "LIVE WORK SIX",
+      "headlineRent": "$5,756 – $5,921",
+      "details": [
+        "2 Beds",
+        "2 Baths",
+        "1,561 Sq Ft"
+      ],
+      "availabilitySummary": "1 Available unit",
+      "image": "https://images1.apartments.com/i2/S81QvYulpIdSPCGty3vlkhQwS9WN9OfDYmzQxZpXqZk/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "112",
+          "price": "$5,756",
+          "sqft": "1,561",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "LIVE WORK THREE",
+      "headlineRent": "$5,172 – $5,321",
+      "details": [
+        "3 Beds",
+        "2 Baths",
+        "1,303 Sq Ft"
+      ],
+      "availabilitySummary": "1 Available unit",
+      "image": "https://images1.apartments.com/i2/dovDUhRUC7rBG4Z48M6859joPPcKhSBlFNcRAQlhZ3w/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "120",
+          "price": "$5,172",
+          "sqft": "1,303",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "C ONE",
+      "headlineRent": "$5,644 – $5,806",
+      "details": [
+        "3 Beds",
+        "2 Baths",
+        "1,366 Sq Ft"
+      ],
+      "availabilitySummary": "1 Available unit",
+      "image": "https://images1.apartments.com/i2/XWM-imEZ3cekNMK9ffLZfnpRAxE_3ocov8GtyMsQKxs/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "576",
+          "price": "$5,644",
+          "sqft": "1,366",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "LIVE WORK SEVEN",
+      "headlineRent": "$6,047 – $6,221",
+      "details": [
+        "3 Beds",
+        "2 Baths",
+        "1,726 Sq Ft"
+      ],
+      "availabilitySummary": "1 Available unit",
+      "image": "https://images1.apartments.com/i2/6lvvSaD2x36WrgqUdOFdJg6_HV6egLk3ikinEyxXpHw/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "106",
+          "price": "$6,047",
+          "sqft": "1,726",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "STUDIO",
+      "headlineRent": "$2,699 – $2,907",
+      "details": [
+        "Studio",
+        "1 Bath",
+        "630 Sq Ft"
+      ],
+      "availabilitySummary": "3 Available units",
+      "image": "https://images1.apartments.com/i2/0HZ-5LGyHmbXDWwhw0zbxPtSSO6eFNnNli6HkFJwP20/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "545",
+          "price": "$2,699",
+          "sqft": "630",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "449",
+          "price": "$2,771",
+          "sqft": "630",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "349",
+          "price": "$2,825",
+          "sqft": "630",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "A THREE",
+      "headlineRent": "$2,879 – $3,482",
+      "details": [
+        "1 Bed",
+        "1 Bath",
+        "660 – 758 Sq Ft"
+      ],
+      "availabilitySummary": "4 Available units",
+      "image": "https://images1.apartments.com/i2/_QF0HXEM-UcHp9t5US2Li9SC759MycTi3kC2di2JJ8s/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "522",
+          "price": "$3,135",
+          "sqft": "693",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "516",
+          "price": "$3,135",
+          "sqft": "693",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "566",
+          "price": "$3,155",
+          "sqft": "660",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "618",
+          "price": "$3,174",
+          "sqft": "693",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "A ONE",
+      "headlineRent": "$3,002 – $3,097",
+      "details": [
+        "1 Bed",
+        "1 Bath",
+        "588 Sq Ft"
+      ],
+      "availabilitySummary": "1 Available unit",
+      "image": "https://images1.apartments.com/i2/1ByjDq4BgZy3RUvTJvOiXg2kgAmsXqpCV3h3YFK6aAQ/105/image.jpg?p=1",
+      "units": [
+        {
+          "unit": "PH714",
+          "price": "$3,002",
+          "sqft": "588",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "A FOUR",
+      "headlineRent": "$3,187 – $3,480",
+      "details": [
+        "1 Bed",
+        "1 Bath",
+        "712 – 808 Sq Ft"
+      ],
+      "availabilitySummary": "4 Available units",
+      "image": "https://images1.apartments.com/i2/2yTZLxmYELI4LE8IojB_DHANdYvN0xPtTAdD92LqqBY/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "368",
+          "price": "$3,187",
+          "sqft": "763",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "305",
+          "price": "$3,199",
+          "sqft": "716",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "PH759",
+          "price": "$3,329",
+          "sqft": "712",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "611",
+          "price": "$3,383",
+          "sqft": "716",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "A TWO",
+      "headlineRent": "$3,407 – $3,506",
+      "details": [
+        "1 Bed",
+        "1 Bath",
+        "646 Sq Ft"
+      ],
+      "availabilitySummary": "1 Available unit",
+      "image": "https://images1.apartments.com/i2/QqC2jwtjQPwfF9L3QOtycbV9NrGkakZgTAnHB5KCbig/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "PH702",
+          "price": "$3,407",
+          "sqft": "646",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "A FIVE",
+      "headlineRent": "$3,416 – $3,782",
+      "details": [
+        "1 Bed",
+        "1 Bath",
+        "733 Sq Ft"
+      ],
+      "availabilitySummary": "2 Available units",
+      "image": "https://images1.apartments.com/i2/QXxi-VyFZeRd2RCDOePrTWJRkWYZz1rKk6pheWbqxew/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "534",
+          "price": "$3,416",
+          "sqft": "733",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "PH734",
+          "price": "$3,676",
+          "sqft": "733",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "A SIX",
+      "headlineRent": "$3,567 – $3,670",
+      "details": [
+        "1 Bed",
+        "1 Bath",
+        "838 – 902 Sq Ft"
+      ],
+      "availabilitySummary": "1 Available unit",
+      "image": "https://images1.apartments.com/i2/hf8HMsJ2C1DRdIeP4c4W8MUZ21FPZiJBnhntlGr2fS4/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "206",
+          "price": "$3,567",
+          "sqft": "838",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "A SEVEN",
+      "headlineRent": "$3,670 – $3,851",
+      "details": [
+        "1 Bed",
+        "1 Bath",
+        "855 Sq Ft"
+      ],
+      "availabilitySummary": "4 Available units",
+      "image": "https://images1.apartments.com/i2/XBG9wg41ZOZ7Qa__1nD7S36riYkb8kgkSbyZWBgJphc/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "358",
+          "price": "$3,670",
+          "sqft": "855",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "651",
+          "price": "$3,675",
+          "sqft": "855",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "658",
+          "price": "$3,724",
+          "sqft": "855",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "PH743",
+          "price": "$3,744",
+          "sqft": "855",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "LIVE WORK ONE",
+      "headlineRent": "$4,263 – $4,386",
+      "details": [
+        "1 Bed",
+        "2 Baths",
+        "1,629 Sq Ft"
+      ],
+      "availabilitySummary": "1 Available unit",
+      "image": "https://images1.apartments.com/i2/JMGp0_-C21HE1A2A9HzGdpt0jTvlxLhB3III7_Dg3R0/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "248",
+          "price": "$4,263",
+          "sqft": "1,629",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "LIVE WORK TWO",
+      "headlineRent": "$4,321 – $4,445",
+      "details": [
+        "1 Bed",
+        "2 Baths",
+        "1,424 Sq Ft"
+      ],
+      "availabilitySummary": "2 Available units",
+      "image": "https://images1.apartments.com/i2/J0b5yFKjwid7iCVavlAKc9M2FdNo2yqToDVVcN8w1vg/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "234",
+          "price": "$4,321",
+          "sqft": "1,424",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "238",
+          "price": "$4,321",
+          "sqft": "1,424",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "B ONE",
+      "headlineRent": "$3,988 – $4,390",
+      "details": [
+        "2 Beds",
+        "2 Baths",
+        "983 – 1,028 Sq Ft"
+      ],
+      "availabilitySummary": "4 Available units",
+      "image": "https://images1.apartments.com/i2/hmk6vRIbNixl5xFhCV4birEBy8J7kuuCb2SktB8d0qQ/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "527",
+          "price": "$4,086",
+          "sqft": "983",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "557",
+          "price": "$4,086",
+          "sqft": "983",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "352",
+          "price": "$4,100",
+          "sqft": "983",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "552",
+          "price": "$4,208",
+          "sqft": "983",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "B TWO",
+      "headlineRent": "$4,173 – $5,005",
+      "details": [
+        "2 Beds",
+        "2 Baths",
+        "1,100 – 1,150 Sq Ft"
+      ],
+      "availabilitySummary": "4 Available units",
+      "image": "https://images1.apartments.com/i2/VXR3lIiKuU0VkSUBwvlXYYVkglKgvejWJI1UiF_xgKE/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "555",
+          "price": "$4,561",
+          "sqft": "1,106",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "548",
+          "price": "$4,634",
+          "sqft": "1,106",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "546",
+          "price": "$4,634",
+          "sqft": "1,106",
+          "availability": "availibility Now"
+        },
+        {
+          "unit": "444",
+          "price": "$4,669",
+          "sqft": "1,100",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "LIVE WORK FOUR",
+      "headlineRent": "$5,447 – $5,604",
+      "details": [
+        "2 Beds",
+        "2 Baths",
+        "1,379 Sq Ft"
+      ],
+      "availabilitySummary": "1 Available unit",
+      "image": "https://images1.apartments.com/i2/ruHlfQlYnSjaaSACSDSWwkTbTqrMad87QEl4aFywUKI/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "110",
+          "price": "$5,447",
+          "sqft": "1,379",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "LIVE WORK FIVE",
+      "headlineRent": "$5,561 – $5,721",
+      "details": [
+        "2 Beds",
+        "2 Baths",
+        "1,446 Sq Ft"
+      ],
+      "availabilitySummary": "1 Available unit",
+      "image": "https://images1.apartments.com/i2/WPQmVMn0qpWF_jEFZSb9DvOVjNJV-moleqnsEjBYFyQ/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "108",
+          "price": "$5,561",
+          "sqft": "1,446",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "LIVE WORK SIX",
+      "headlineRent": "$5,756 – $5,921",
+      "details": [
+        "2 Beds",
+        "2 Baths",
+        "1,561 Sq Ft"
+      ],
+      "availabilitySummary": "1 Available unit",
+      "image": "https://images1.apartments.com/i2/S81QvYulpIdSPCGty3vlkhQwS9WN9OfDYmzQxZpXqZk/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "112",
+          "price": "$5,756",
+          "sqft": "1,561",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "LIVE WORK THREE",
+      "headlineRent": "$5,172 – $5,321",
+      "details": [
+        "3 Beds",
+        "2 Baths",
+        "1,303 Sq Ft"
+      ],
+      "availabilitySummary": "1 Available unit",
+      "image": "https://images1.apartments.com/i2/dovDUhRUC7rBG4Z48M6859joPPcKhSBlFNcRAQlhZ3w/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "120",
+          "price": "$5,172",
+          "sqft": "1,303",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "C ONE",
+      "headlineRent": "$5,644 – $5,806",
+      "details": [
+        "3 Beds",
+        "2 Baths",
+        "1,366 Sq Ft"
+      ],
+      "availabilitySummary": "1 Available unit",
+      "image": "https://images1.apartments.com/i2/XWM-imEZ3cekNMK9ffLZfnpRAxE_3ocov8GtyMsQKxs/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "576",
+          "price": "$5,644",
+          "sqft": "1,366",
+          "availability": "availibility Now"
+        }
+      ]
+    },
+    {
+      "modelName": "LIVE WORK SEVEN",
+      "headlineRent": "$6,047 – $6,221",
+      "details": [
+        "3 Beds",
+        "2 Baths",
+        "1,726 Sq Ft"
+      ],
+      "availabilitySummary": "1 Available unit",
+      "image": "https://images1.apartments.com/i2/6lvvSaD2x36WrgqUdOFdJg6_HV6egLk3ikinEyxXpHw/105/image.png?p=1",
+      "units": [
+        {
+          "unit": "106",
+          "price": "$6,047",
+          "sqft": "1,726",
+          "availability": "availibility Now"
+        }
+      ]
+    }
+  ],
+  "contactInfo": {
+    "phone": {
+      "formatted": "(818) 435-6593",
+      "digits": "8184356593"
+    },
+    "website": {
+      "url": "https://www.theqdesoto.com/?rcstdid=OQ%3d%3d-o6qee6pfj48%3d",
+      "label": "View Property Website"
+    },
+    "language": "Language: English",
+    "todaysHours": "Open 9am - 6pm Today",
+    "officeHours": [
+      {
+        "days": "Monday - Sunday,",
+        "hours": "9am - 6pm"
+      }
+    ],
+    "logo": {
+      "url": "https://images1.apartments.com/i2/C57J-_s5Ar0F1zg3hwgeFljuFlOAc9DFQURgL9YQcSM/115/balaciano-group-logo.jpg",
+      "alt": "Property Management Company Logo",
+      "width": 134,
+      "height": 54
+    }
+  },
+  "amenities": {
+    "community": {
+      "title": "Community Amenities",
+      "icons": [
+        "Pool",
+        "Fitness Center",
+        "Furnished Units Available",
+        "Elevator",
+        "Concierge",
+        "Clubhouse",
+        "Controlled Access",
+        "Business Center",
+        "Washer/Dryer",
+        "Air Conditioning",
+        "Dishwasher",
+        "High Speed Internet Access",
+        "Walk-In Closets",
+        "Island Kitchen",
+        "Microwave",
+        "Refrigerator"
+      ],
+      "groups": [
+        {
+          "header": "Property Services",
+          "items": [
+            "Package Service",
+            "Community-Wide WiFi",
+            "Controlled Access",
+            "Maintenance on site",
+            "Property Manager on Site",
+            "Concierge",
+            "Furnished Units Available",
+            "On-Site Retail",
+            "Guest Apartment",
+            "Pet Washing Station",
+            "EV Charging",
+            "Key Fob Entry"
+          ]
+        },
+        {
+          "header": "Shared Community",
+          "items": [
+            "Elevator",
+            "Business Center",
+            "Clubhouse",
+            "Lounge",
+            "Multi Use Room",
+            "Breakfast/Coffee Concierge",
+            "Conference Rooms"
+          ]
+        },
+        {
+          "header": "Fitness & Recreation",
+          "items": [
+            "Fitness Center",
+            "Hot Tub",
+            "Sauna",
+            "Spa",
+            "Pool",
+            "Bicycle Storage",
+            "Media Center/Movie Theatre"
+          ]
+        },
+        {
+          "header": "Outdoor Features",
+          "items": [
+            "Gated",
+            "Sundeck",
+            "Grill",
+            "Dog Park"
+          ]
+        },
+        {
+          "header": "Highlights",
+          "items": [
+            "High Speed Internet Access",
+            "Washer/Dryer",
+            "Air Conditioning",
+            "Heating",
+            "Cable Ready",
+            "Framed Mirrors"
+          ]
+        },
+        {
+          "header": "Kitchen Features & Appliances",
+          "items": [
+            "Dishwasher",
+            "Stainless Steel Appliances",
+            "Island Kitchen",
+            "Kitchen",
+            "Microwave",
+            "Oven",
+            "Range",
+            "Refrigerator",
+            "Quartz Countertops"
+          ]
+        },
+        {
+          "header": "Model Details",
+          "items": [
+            "Vinyl Flooring",
+            "High Ceilings",
+            "Recreation Room",
+            "Walk-In Closets",
+            "Furnished",
+            "Balcony",
+            "Patio"
+          ]
+        }
+      ]
+    },
+    "apartment": {
+      "title": "Apartment Features",
+      "icons": [
+        "Pool",
+        "Fitness Center",
+        "Furnished Units Available",
+        "Elevator",
+        "Concierge",
+        "Clubhouse",
+        "Controlled Access",
+        "Business Center",
+        "Washer/Dryer",
+        "Air Conditioning",
+        "Dishwasher",
+        "High Speed Internet Access",
+        "Walk-In Closets",
+        "Island Kitchen",
+        "Microwave",
+        "Refrigerator"
+      ],
+      "groups": [
+        {
+          "header": "Property Services",
+          "items": [
+            "Package Service",
+            "Community-Wide WiFi",
+            "Controlled Access",
+            "Maintenance on site",
+            "Property Manager on Site",
+            "Concierge",
+            "Furnished Units Available",
+            "On-Site Retail",
+            "Guest Apartment",
+            "Pet Washing Station",
+            "EV Charging",
+            "Key Fob Entry"
+          ]
+        },
+        {
+          "header": "Shared Community",
+          "items": [
+            "Elevator",
+            "Business Center",
+            "Clubhouse",
+            "Lounge",
+            "Multi Use Room",
+            "Breakfast/Coffee Concierge",
+            "Conference Rooms"
+          ]
+        },
+        {
+          "header": "Fitness & Recreation",
+          "items": [
+            "Fitness Center",
+            "Hot Tub",
+            "Sauna",
+            "Spa",
+            "Pool",
+            "Bicycle Storage",
+            "Media Center/Movie Theatre"
+          ]
+        },
+        {
+          "header": "Outdoor Features",
+          "items": [
+            "Gated",
+            "Sundeck",
+            "Grill",
+            "Dog Park"
+          ]
+        },
+        {
+          "header": "Highlights",
+          "items": [
+            "High Speed Internet Access",
+            "Washer/Dryer",
+            "Air Conditioning",
+            "Heating",
+            "Cable Ready",
+            "Framed Mirrors"
+          ]
+        },
+        {
+          "header": "Kitchen Features & Appliances",
+          "items": [
+            "Dishwasher",
+            "Stainless Steel Appliances",
+            "Island Kitchen",
+            "Kitchen",
+            "Microwave",
+            "Oven",
+            "Range",
+            "Refrigerator",
+            "Quartz Countertops"
+          ]
+        },
+        {
+          "header": "Model Details",
+          "items": [
+            "Vinyl Flooring",
+            "High Ceilings",
+            "Recreation Room",
+            "Walk-In Closets",
+            "Furnished",
+            "Balcony",
+            "Patio"
+          ]
+        }
+      ]
+    }
+  },
+  "feesAndPolicies": {
+    "tabs": [
+      {
+        "tab": "Pets",
+        "cards": [
+          {
+            "header": "Dogs Allowed",
+            "rows": [
+              {
+                "name": "Monthly pet fee",
+                "value": "$50"
+              },
+              {
+                "name": "One time Fee",
+                "value": "$60"
+              },
+              {
+                "name": "Pet deposit",
+                "value": "$500"
+              },
+              {
+                "name": "Pet Limit",
+                "value": "2"
+              }
+            ],
+            "comments": "| Restrictions: None"
+          },
+          {
+            "header": "Cats Allowed",
+            "rows": [
+              {
+                "name": "Monthly pet fee",
+                "value": "$50"
+              },
+              {
+                "name": "One time Fee",
+                "value": "$60"
+              },
+              {
+                "name": "Pet deposit",
+                "value": "$500"
+              },
+              {
+                "name": "Pet Limit",
+                "value": "2"
+              }
+            ],
+            "comments": "| Restrictions: None"
+          }
+        ]
+      },
+      {
+        "tab": "Parking",
+        "cards": [
+          {
+            "header": "Parking",
+            "rows": [
+              {
+                "name": "Surface Lot",
+                "value": "--"
+              },
+              {
+                "name": "Other",
+                "value": "--"
+              }
+            ],
+            "comments": null
+          },
+          {
+            "header": "",
+            "rows": [
+              {
+                "name": "Garage",
+                "value": "--"
+              }
+            ],
+            "comments": null
+          }
+        ]
+      }
+    ],
+    "details": [
+      {
+        "header": "Property Information",
+        "items": [
+          "Built in 2025",
+          "376 units/7 stories",
+          "Furnished Units Available"
+        ]
+      }
+    ]
+  }
+}
