@@ -4,8 +4,16 @@ on:
   push:
     branches: [main]
 
+concurrency:
+  group: prod-deploy
+  cancel-in-progress: true
+
 env:
-  IMAGE: ghcr.io/${{ secrets.GHCR_USER }}/sase-backend:latest
+  IMAGE_BASE: ghcr.io/${{ github.repository_owner }}/sase-backend
+  IMAGE_LATEST: ghcr.io/${{ github.repository_owner }}/sase-backend:latest
+  IMAGE_SHA: ghcr.io/${{ github.repository_owner }}/sase-backend:${{ github.sha }}
+  BUILD_CONTEXT: .
+  DOCKERFILE: ./Dockerfile
 
 jobs:
   build-publish:
@@ -16,14 +24,30 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Login to GHCR
-        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GHCR_USER }}" --password-stdin
+      - name: Login to GHCR (via GITHUB_TOKEN)
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build image
-        run: docker build -t $IMAGE .
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
 
-      - name: Push image
-        run: docker push $IMAGE
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build & Push (latest + sha) with cache
+        uses: docker/build-push-action@v6
+        with:
+          context: ${{ env.BUILD_CONTEXT }}
+          file: ${{ env.DOCKERFILE }}
+          push: true
+          tags: |
+            ${{ env.IMAGE_LATEST }}
+            ${{ env.IMAGE_SHA }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
   deploy:
     needs: build-publish
@@ -39,8 +63,8 @@ jobs:
       - name: Pull & Restart on EC2
         run: |
           ssh -o StrictHostKeyChecking=yes ubuntu@${{ secrets.EC2_HOST }} '
-            # login to GHCR on EC2 (for private images)
-            echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GHCR_USER }}" --password-stdin || true
+            # if your GHCR package is private, keep this login:
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin || true
             cd /opt/app &&
             docker compose pull &&
             docker compose up -d &&
