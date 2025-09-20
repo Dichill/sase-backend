@@ -1,0 +1,48 @@
+name: Build & Deploy to EC2
+
+on:
+  push:
+    branches: [main]
+
+env:
+  IMAGE: ghcr.io/${{ secrets.GHCR_USER }}/sase-backend:latest
+
+jobs:
+  build-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to GHCR
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GHCR_USER }}" --password-stdin
+
+      - name: Build image
+        run: docker build -t $IMAGE .
+
+      - name: Push image
+        run: docker push $IMAGE
+
+  deploy:
+    needs: build-publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "${{ secrets.EC2_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Pull & Restart on EC2
+        run: |
+          ssh -o StrictHostKeyChecking=yes ubuntu@${{ secrets.EC2_HOST }} '
+            # login to GHCR on EC2 (for private images)
+            echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GHCR_USER }}" --password-stdin || true
+            cd /opt/app &&
+            docker compose pull &&
+            docker compose up -d &&
+            docker image prune -f
+          '
