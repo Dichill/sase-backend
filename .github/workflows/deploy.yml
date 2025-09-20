@@ -6,11 +6,10 @@ on:
     branches: [main]
 
 env:
-  # adjust if your Dockerfile isn’t at repo root
   DOCKERFILE: ./Dockerfile
   BUILD_CONTEXT: .
-  SERVICE_NAME: api # must match service name in docker-compose.yml on EC2
-  IMAGE_REPO: sase-backend # repo part after GHCR user/org
+  SERVICE_NAME: api
+  IMAGE_REPO: sase-backend
   IMAGE_TAG: latest
 
 jobs:

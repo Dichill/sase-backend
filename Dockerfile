@@ -30,7 +30,7 @@
     FROM ${NODE_IMAGE} AS runner
     WORKDIR /app
     ENV NODE_ENV=production
-    ENV PORT=3000
+    ENV PORT=4000
     # non-root user
     RUN addgroup -S app && adduser -S app -G app
     USER app
@@ -39,6 +39,6 @@
     COPY --from=builder   /app/dist        ./dist
     COPY package.json ./
     
-    EXPOSE 3000
+    EXPOSE 4000
     CMD ["node", "dist/main.js"]
     
