@@ -70,6 +70,53 @@ export class ListingController {
     }
   }
 
+  @Post('rescrape')
+  async rescrapeApartment(
+    @Body() scrapeDto: ScrapeApartmentDto,
+    @GetUser() user: User,
+  ): Promise<ScrapeApartmentResponseDto> {
+    if (!scrapeDto.url) {
+      throw new HttpException('URL is required', HttpStatus.BAD_REQUEST);
+    }
+
+    if (!this.isValidApartmentsUrl(scrapeDto.url)) {
+      throw new HttpException(
+        'Invalid URL. Please provide a valid apartments.com URL',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    try {
+      const scrapedData = await this.listingService.rescrapeApartmentData(
+        scrapeDto.url,
+        user,
+      );
+
+      this.logger.log(
+        `Successfully rescraped data for property: ${scrapedData.propertyName}`,
+      );
+
+      return {
+        success: true,
+        data: scrapedData,
+      };
+    } catch (error: unknown) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Unknown error';
+      const errorStack = error instanceof Error ? error.stack : undefined;
+
+      this.logger.error(
+        `Error rescraping apartment data: ${errorMessage}`,
+        errorStack,
+      );
+
+      return {
+        success: false,
+        error: `Failed to rescrape apartment data: ${errorMessage}`,
+      };
+    }
+  }
+
   private isValidApartmentsUrl(url: string): boolean {
     try {
       const parsedUrl = new URL(url);

@@ -50,6 +50,19 @@ export class ListingService {
       `No existing data found, starting to scrape apartment data from: ${url}`,
     );
 
+    return await this.performScraping(url, user, false);
+  }
+
+  async rescrapeApartmentData(url: string, user: User): Promise<ScrapedData> {
+    this.logger.log(`Processing apartment data rescrape request from: ${url}`);
+    return await this.performScraping(url, user, true);
+  }
+
+  private async performScraping(
+    url: string,
+    user: User,
+    forceUpdate: boolean,
+  ): Promise<ScrapedData> {
     const browser = await puppeteer.launch({
       headless: true,
       args: [`--user-agent=${this.userAgent}`],
@@ -97,21 +110,53 @@ export class ListingService {
         feesAndPolicies,
       };
 
-      // Save newly scraped data to database
-      const { error: insertError } = await this.supabaseClient
-        .from('listings')
-        .insert({
-          data: result,
-          url: url,
-          requested_by: user.id,
-        });
+      if (forceUpdate) {
+        const { error: updateError } = await this.supabaseClient
+          .from('listings')
+          .update({
+            data: result,
+            updated_at: new Date().toISOString(),
+          })
+          .eq('url', url);
 
-      if (insertError) {
-        this.logger.warn('Error saving scraped data to database:', insertError);
+        if (updateError) {
+          this.logger.log('No existing record to update, inserting new record');
+          const { error: insertError } = await this.supabaseClient
+            .from('listings')
+            .insert({
+              data: result,
+              url: url,
+              requested_by: user.id,
+            });
+
+          if (insertError) {
+            this.logger.warn(
+              'Error inserting new scraped data to database:',
+              insertError,
+            );
+          }
+        } else {
+          this.logger.log('Successfully updated existing listing record');
+        }
+      } else {
+        const { error: insertError } = await this.supabaseClient
+          .from('listings')
+          .insert({
+            data: result,
+            url: url,
+            requested_by: user.id,
+          });
+
+        if (insertError) {
+          this.logger.warn(
+            'Error saving scraped data to database:',
+            insertError,
+          );
+        }
       }
 
       this.logger.log(
-        'Successfully completed scraping and saving apartment data',
+        `Successfully completed ${forceUpdate ? 'rescraping' : 'scraping'} and saving apartment data`,
       );
       return result;
     } finally {
