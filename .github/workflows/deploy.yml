@@ -1,72 +1,77 @@
-name: Build & Deploy to EC2
+name: Build & Deploy API (api-prod)
+run-name: ${{ github.actor }} is deploying API to production 🚀
 
 on:
   push:
     branches: [main]
 
-concurrency:
-  group: prod-deploy
-  cancel-in-progress: true
-
 env:
-  IMAGE_BASE: ghcr.io/${{ github.repository_owner }}/sase-backend
-  IMAGE_LATEST: ghcr.io/${{ github.repository_owner }}/sase-backend:latest
-  IMAGE_SHA: ghcr.io/${{ github.repository_owner }}/sase-backend:${{ github.sha }}
-  BUILD_CONTEXT: .
+  # adjust if your Dockerfile isn’t at repo root
   DOCKERFILE: ./Dockerfile
+  BUILD_CONTEXT: .
+  SERVICE_NAME: api # must match service name in docker-compose.yml on EC2
+  IMAGE_REPO: sase-backend # repo part after GHCR user/org
+  IMAGE_TAG: latest
 
 jobs:
-  build-publish:
+  build-and-publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Login to GHCR (via GITHUB_TOKEN)
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Log in to GHCR
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GHCR_USER }}" --password-stdin
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+      - name: Normalize lowercase image URL
+        id: lc
+        run: |
+          OWNER_LC=$(echo "${{ secrets.GHCR_USER }}" | tr '[:upper:]' '[:lower:]')
+          echo "owner_lc=$OWNER_LC" >> $GITHUB_OUTPUT
+          echo "image=ghcr.io/${OWNER_LC}/${{ env.IMAGE_REPO }}:${{ env.IMAGE_TAG }}" >> $GITHUB_OUTPUT
 
-      - name: Set up Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build & Push (latest + sha) with cache
-        uses: docker/build-push-action@v6
-        with:
-          context: ${{ env.BUILD_CONTEXT }}
-          file: ${{ env.DOCKERFILE }}
-          push: true
-          tags: |
-            ${{ env.IMAGE_LATEST }}
-            ${{ env.IMAGE_SHA }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+      - name: Build and Push Production Docker Image
+        run: |
+          docker build -t "${{ steps.lc.outputs.image }}" -f "${{ env.DOCKERFILE }}" "${{ env.BUILD_CONTEXT }}"
+          docker push "${{ steps.lc.outputs.image }}"
 
   deploy:
-    needs: build-publish
+    needs: build-and-publish
     runs-on: ubuntu-latest
-    steps:
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H "${{ secrets.EC2_HOST }}" >> ~/.ssh/known_hosts
 
-      - name: Pull & Restart on EC2
-        run: |
-          ssh -o StrictHostKeyChecking=yes ubuntu@${{ secrets.EC2_HOST }} '
-            # if your GHCR package is private, keep this login:
-            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin || true
-            cd /opt/app &&
-            docker compose pull &&
-            docker compose up -d &&
+    steps:
+      # If your EC2_SSH_KEY secret already contains the full private key block,
+      # you can pass it directly to appleboy via the "key" field (no need to write a file).
+      - name: Deploy to Production EC2
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            set -euo pipefail
+
+            # Compose command shim (supports both docker-compose and docker compose)
+            if command -v docker-compose >/dev/null 2>&1; then
+              DC="docker-compose"
+            else
+              DC="docker compose"
+            fi
+
+            # Log in to GHCR for private pulls
+            echo "🔐 Logging into GHCR"
+            echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GHCR_USER }}" --password-stdin
+
+            # Pull and restart only the service (falls back to full stack if service not named)
+            echo "📦 Pulling latest image and restarting"
+            cd /opt/app
+            if ! $DC pull ${{ env.SERVICE_NAME }}; then
+              $DC pull
+            fi
+            if ! $DC up -d ${{ env.SERVICE_NAME }}; then
+              $DC up -d
+            fi
+
+            # Cleanup old, dangling images
+            echo "🧼 Pruning dangling images"
             docker image prune -f
-          '
