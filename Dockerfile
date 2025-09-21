@@ -26,18 +26,23 @@
     COPY package.json pnpm-lock.yaml ./
     RUN pnpm install --frozen-lockfile --prod
     
-    # ---------- runtime ----------
-    FROM ${NODE_IMAGE} AS runner
-    WORKDIR /app
-    ENV NODE_ENV=production
-    ENV PORT=4000
-    # non-root user
-    RUN addgroup -S app && adduser -S app -G app
-    USER app
-    
-    COPY --from=prod-deps /app/node_modules ./node_modules
-    COPY --from=builder   /app/dist        ./dist
-    COPY package.json ./
+# ---------- runtime ----------
+FROM ${NODE_IMAGE} AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+ENV PORT=4000
+# non-root user
+RUN addgroup -S app && adduser -S app -G app
+
+# Create generated-pdfs directory with proper permissions BEFORE switching to non-root user
+RUN mkdir -p /app/generated-pdfs && chown -R app:app /app/generated-pdfs
+
+COPY --from=prod-deps /app/node_modules ./node_modules
+COPY --from=builder   /app/dist        ./dist
+COPY package.json ./
+
+# Switch to non-root user AFTER setting up directories and permissions
+USER app
     
     EXPOSE 4000
     CMD ["node", "dist/main.js"]
