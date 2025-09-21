@@ -31,8 +31,6 @@ FROM ${NODE_IMAGE} AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=4000
-ENV NODE_OPTIONS="--max-old-space-size=4096"
-ENV MAX_FILE_SIZE=52428800
 
 # Install Chromium and necessary dependencies for Puppeteer
 RUN apk add --no-cache \
