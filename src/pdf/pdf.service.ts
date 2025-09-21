@@ -4,7 +4,12 @@ import * as path from 'path';
 import { createReport } from 'docx-templates';
 import * as libre from 'libreoffice-convert';
 import { promisify } from 'util';
-import { PdfGenerationDto, TemplateData } from './pdf.types';
+import { PDFDocument } from 'pdf-lib';
+import {
+  PdfGenerationDto,
+  TemplateData,
+  PdfMergeResponseDto,
+} from './pdf.types';
 
 @Injectable()
 export class PdfService {
@@ -170,6 +175,110 @@ export class PdfService {
       filename,
       fileSize: stats.size,
     };
+  }
+
+  async mergePdfs(
+    basePdfBuffer: Buffer,
+    additionalPdfBuffers: Buffer[],
+  ): Promise<Buffer> {
+    try {
+      this.logger.log(
+        `Starting PDF merge process with base PDF and ${additionalPdfBuffers.length} additional PDFs`,
+      );
+
+      const mergedPdf = await PDFDocument.create();
+
+      const basePdf = await PDFDocument.load(basePdfBuffer);
+      const basePageIndices = basePdf.getPageIndices();
+      const basePages = await mergedPdf.copyPages(basePdf, basePageIndices);
+
+      basePages.forEach((page) => mergedPdf.addPage(page));
+      this.logger.log(`Added ${basePages.length} pages from base PDF`);
+
+      for (let i = 0; i < additionalPdfBuffers.length; i++) {
+        try {
+          const additionalPdf = await PDFDocument.load(additionalPdfBuffers[i]);
+          const additionalPageIndices = additionalPdf.getPageIndices();
+          const additionalPages = await mergedPdf.copyPages(
+            additionalPdf,
+            additionalPageIndices,
+          );
+
+          additionalPages.forEach((page) => mergedPdf.addPage(page));
+          this.logger.log(
+            `Added ${additionalPages.length} pages from additional PDF ${i + 1}`,
+          );
+        } catch (error) {
+          const errorMessage =
+            error instanceof Error ? error.message : 'Unknown error';
+          this.logger.warn(
+            `Failed to process additional PDF ${i + 1}: ${errorMessage}`,
+          );
+        }
+      }
+
+      const mergedPdfBuffer = Buffer.from(await mergedPdf.save());
+
+      this.logger.log(
+        `PDF merge completed successfully. Total pages: ${mergedPdf.getPageCount()}`,
+      );
+
+      return mergedPdfBuffer;
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Unknown error';
+      this.logger.error(
+        `PDF merge failed: ${errorMessage}`,
+        error instanceof Error ? error.stack : undefined,
+      );
+
+      throw new HttpException(
+        `Failed to merge PDFs: ${errorMessage}`,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  async mergePdfsAndSave(
+    basePdfBuffer: Buffer,
+    additionalPdfBuffers: Buffer[],
+    customFilename?: string,
+  ): Promise<PdfMergeResponseDto> {
+    try {
+      const mergedPdfBuffer = await this.mergePdfs(
+        basePdfBuffer,
+        additionalPdfBuffers,
+      );
+
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+      const filename = customFilename || `merged-pdf-${timestamp}.pdf`;
+      const filepath = path.join(this.outputDir, filename);
+
+      await fs.promises.writeFile(filepath, mergedPdfBuffer);
+
+      const mergedPdf = await PDFDocument.load(mergedPdfBuffer);
+      const totalPages = mergedPdf.getPageCount();
+
+      this.logger.log(`Merged PDF saved to: ${filepath}`);
+
+      return {
+        success: true,
+        filename,
+        fileSize: mergedPdfBuffer.length,
+        mergedAt: new Date().toISOString(),
+        totalPages,
+        sourceFileCount: additionalPdfBuffers.length + 1, // +1 for base PDF
+      };
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Unknown error';
+      this.logger.error(`PDF merge and save failed: ${errorMessage}`);
+
+      return {
+        success: false,
+        error: `Failed to merge and save PDFs: ${errorMessage}`,
+      };
+    }
   }
 
   async cleanupOldFiles(): Promise<void> {

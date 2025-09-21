@@ -75,3 +75,18 @@ export interface TemplateData {
   LISTING_CREATED_AT: string;
   LISTING_UPDATED_AT: string;
 }
+
+export interface PdfMergeRequestDto {
+  basePdf: Express.Multer.File;
+  additionalPdfs: Express.Multer.File[];
+}
+
+export interface PdfMergeResponseDto {
+  success: boolean;
+  error?: string;
+  filename?: string;
+  fileSize?: number;
+  mergedAt?: string;
+  totalPages?: number;
+  sourceFileCount?: number;
+}
