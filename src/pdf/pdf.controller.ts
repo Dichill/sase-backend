@@ -99,6 +99,10 @@ export class PdfController {
       {
         limits: {
           files: 11,
+          fileSize: parseInt(process.env.MAX_FILE_SIZE || '52428800'),
+          fieldSize: parseInt(process.env.MAX_FILE_SIZE || '52428800'),
+          fields: 20,
+          parts: 100,
         },
       },
     ),
