@@ -4,11 +4,12 @@ import * as path from 'path';
 import { createReport } from 'docx-templates';
 import * as libre from 'libreoffice-convert';
 import { promisify } from 'util';
-import { PDFDocument } from 'pdf-lib';
+import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import {
   PdfGenerationDto,
   TemplateData,
   PdfMergeResponseDto,
+  PdfHeaderOptions,
 } from './pdf.types';
 
 @Injectable()
@@ -177,9 +178,62 @@ export class PdfService {
     };
   }
 
+  private async addHeaderToPdf(
+    pdfBuffer: Buffer,
+    headerText: string,
+    options?: Partial<PdfHeaderOptions>,
+  ): Promise<Buffer> {
+    try {
+      const pdfDoc = await PDFDocument.load(pdfBuffer);
+      const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+      const fontSize = options?.fontSize || 12;
+      const color = options?.color || '#000000';
+      const position = options?.position || { x: 50, y: 0 };
+
+      const hexToRgb = (hex: string) => {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result
+          ? {
+              r: parseInt(result[1], 16) / 255,
+              g: parseInt(result[2], 16) / 255,
+              b: parseInt(result[3], 16) / 255,
+            }
+          : { r: 0, g: 0, b: 0 };
+      };
+
+      const rgbColor = hexToRgb(color);
+
+      const pages = pdfDoc.getPages();
+
+      for (const page of pages) {
+        const { height } = page.getSize();
+
+        const yPosition = position.y === 0 ? height - 30 : position.y;
+
+        page.drawText(headerText, {
+          x: position.x,
+          y: yPosition,
+          size: fontSize,
+          font: font,
+          color: rgb(rgbColor.r, rgbColor.g, rgbColor.b),
+        });
+      }
+
+      const modifiedPdfBuffer = await pdfDoc.save();
+      return Buffer.from(modifiedPdfBuffer);
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Unknown error';
+      this.logger.error(`Failed to add header to PDF: ${errorMessage}`);
+      throw new Error(`Header addition failed: ${errorMessage}`);
+    }
+  }
+
   async mergePdfs(
     basePdfBuffer: Buffer,
     additionalPdfBuffers: Buffer[],
+    headers?: string[],
   ): Promise<Buffer> {
     try {
       this.logger.log(
@@ -197,7 +251,17 @@ export class PdfService {
 
       for (let i = 0; i < additionalPdfBuffers.length; i++) {
         try {
-          const additionalPdf = await PDFDocument.load(additionalPdfBuffers[i]);
+          let pdfBuffer = additionalPdfBuffers[i];
+
+          // Add header if provided for this PDF
+          if (headers && headers[i] && headers[i].trim()) {
+            this.logger.log(
+              `Adding header "${headers[i]}" to additional PDF ${i + 1}`,
+            );
+            pdfBuffer = await this.addHeaderToPdf(pdfBuffer, headers[i].trim());
+          }
+
+          const additionalPdf = await PDFDocument.load(pdfBuffer);
           const additionalPageIndices = additionalPdf.getPageIndices();
           const additionalPages = await mergedPdf.copyPages(
             additionalPdf,
@@ -205,8 +269,12 @@ export class PdfService {
           );
 
           additionalPages.forEach((page) => mergedPdf.addPage(page));
+          const headerInfo =
+            headers && headers[i] ? ` with header "${headers[i]}"` : '';
           this.logger.log(
-            `Added ${additionalPages.length} pages from additional PDF ${i + 1}`,
+            `Added ${additionalPages.length} pages from additional PDF ${
+              i + 1
+            }${headerInfo}`,
           );
         } catch (error) {
           const errorMessage =
@@ -243,11 +311,13 @@ export class PdfService {
     basePdfBuffer: Buffer,
     additionalPdfBuffers: Buffer[],
     customFilename?: string,
+    headers?: string[],
   ): Promise<PdfMergeResponseDto> {
     try {
       const mergedPdfBuffer = await this.mergePdfs(
         basePdfBuffer,
         additionalPdfBuffers,
+        headers,
       );
 
       const timestamp = new Date().toISOString().replace(/[:.]/g, '-');

@@ -79,6 +79,17 @@ export interface TemplateData {
 export interface PdfMergeRequestDto {
   basePdf: Express.Multer.File;
   additionalPdfs: Express.Multer.File[];
+  headers?: string[];
+}
+
+export interface PdfHeaderOptions {
+  text: string;
+  fontSize?: number;
+  color?: string;
+  position?: {
+    x: number;
+    y: number;
+  };
 }
 
 export interface PdfMergeResponseDto {

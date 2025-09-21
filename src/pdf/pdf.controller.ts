@@ -98,7 +98,6 @@ export class PdfController {
       ],
       {
         limits: {
-          fileSize: 50 * 1024 * 1024, // 50MB per file
           files: 11,
         },
       },
@@ -110,6 +109,7 @@ export class PdfController {
       basePdf?: Express.Multer.File[];
       additionalPdfs?: Express.Multer.File[];
     },
+    @Body() body: { headers?: string | string[] },
     @GetUser() user: User,
     @Res() res: Response,
   ): Promise<void> {
@@ -138,8 +138,34 @@ export class PdfController {
         }
       }
 
+      // Process headers - can be sent as JSON string or array
+      let headers: string[] | undefined;
+      if (body.headers) {
+        if (typeof body.headers === 'string') {
+          try {
+            // Try to parse as JSON array first
+            headers = JSON.parse(body.headers) as string[];
+          } catch {
+            // If not JSON, treat as comma-separated string
+            headers = body.headers
+              .split(',')
+              .map((h) => h.trim())
+              .filter((h) => h.length > 0);
+          }
+        } else if (Array.isArray(body.headers)) {
+          headers = body.headers.filter(
+            (h) => typeof h === 'string' && h.trim().length > 0,
+          );
+        }
+      }
+
+      const headersInfo =
+        headers && headers.length > 0
+          ? ` with headers: [${headers.join(', ')}]`
+          : '';
+
       this.logger.log(
-        `PDF merge requested by user ${user.id}. Base PDF: ${(files.basePdf[0] as any).originalname}, Additional PDFs: ${files.additionalPdfs.length}`,
+        `PDF merge requested by user ${user.id}. Base PDF: ${(files.basePdf[0] as any).originalname}, Additional PDFs: ${files.additionalPdfs.length}${headersInfo}`,
       );
 
       const basePdfBuffer: Buffer = (files.basePdf[0] as any).buffer;
@@ -150,6 +176,7 @@ export class PdfController {
       const mergedPdfBuffer = await this.pdfService.mergePdfs(
         basePdfBuffer,
         additionalPdfBuffers,
+        headers,
       );
 
       const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
