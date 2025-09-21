@@ -8,9 +8,10 @@ import {
   UseGuards,
   Res,
   Header,
+  Inject,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { PdfService } from './pdf.service';
+import { PdfPuppeteerService } from './pdf-puppeteer.service';
 import { PdfGenerationDto } from './pdf.types';
 import { AuthGuard } from '../guard/AuthGuard';
 import { GetUser } from '../guard/user.decorator';
@@ -21,7 +22,9 @@ import { User } from '@supabase/supabase-js';
 export class PdfController {
   private readonly logger = new Logger(PdfController.name);
 
-  constructor(private readonly pdfService: PdfService) {}
+  constructor(
+    @Inject('PdfService') private readonly pdfService: PdfPuppeteerService,
+  ) {}
 
   @Post('generate')
   @Header('Content-Type', 'application/pdf')
