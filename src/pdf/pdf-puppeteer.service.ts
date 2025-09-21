@@ -334,10 +334,17 @@ export class PdfPuppeteerService {
 </html>`;
   }
 
-  private async convertHtmlToPdf(htmlContent: string): Promise<Buffer> {
+  private async convertHtmlToPdf(
+    htmlContent: string,
+    retryCount: number = 0,
+  ): Promise<Buffer> {
+    const maxRetries = 2;
     let browser: Browser | undefined;
+
     try {
-      this.logger.log('Starting HTML to PDF conversion with Puppeteer');
+      this.logger.log(
+        `Starting HTML to PDF conversion with Puppeteer (attempt ${retryCount + 1})`,
+      );
 
       browser = await puppeteer.launch({
         headless: true,
@@ -347,16 +354,35 @@ export class PdfPuppeteerService {
           '--disable-dev-shm-usage',
           '--disable-accelerated-2d-canvas',
           '--no-first-run',
-          '--no-zygote',
-          '--single-process',
           '--disable-gpu',
+          '--disable-web-security',
+          '--disable-features=VizDisplayCompositor',
+          '--run-all-compositor-stages-before-draw',
+          '--disable-background-timer-throttling',
+          '--disable-renderer-backgrounding',
+          '--disable-backgrounding-occluded-windows',
+          '--disable-ipc-flooding-protection',
+          '--memory-pressure-off',
+          '--max_old_space_size=4096',
         ],
         executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
+        timeout: 60000, // 60 second timeout
+        protocolTimeout: 60000,
       });
 
       const page: Page = await browser.newPage();
 
-      await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+      await page.setViewport({ width: 1200, height: 800 });
+      await page.setUserAgent(
+        'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+      );
+
+      await page.setContent(htmlContent, {
+        waitUntil: 'networkidle0',
+        timeout: 30000,
+      });
+
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       const pdfBuffer = await page.pdf({
         format: 'A4',
@@ -367,18 +393,41 @@ export class PdfPuppeteerService {
           bottom: '20mm',
           left: '20mm',
         },
+        timeout: 30000,
       });
 
-      this.logger.log('HTML to PDF conversion completed');
+      this.logger.log('HTML to PDF conversion completed successfully');
       return Buffer.from(pdfBuffer);
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : 'Unknown error';
-      this.logger.error(`Failed to convert HTML to PDF: ${errorMessage}`);
+      this.logger.error(
+        `Failed to convert HTML to PDF (attempt ${retryCount + 1}): ${errorMessage}`,
+      );
+
+      if (
+        retryCount < maxRetries &&
+        (errorMessage.includes('Target closed') ||
+          errorMessage.includes('Protocol error') ||
+          errorMessage.includes('Connection closed'))
+      ) {
+        this.logger.warn(
+          `Retrying PDF conversion (${retryCount + 1}/${maxRetries})`,
+        );
+        await new Promise((resolve) =>
+          setTimeout(resolve, 1000 * (retryCount + 1)),
+        );
+        return this.convertHtmlToPdf(htmlContent, retryCount + 1);
+      }
+
       throw new Error(`PDF conversion failed: ${errorMessage}`);
     } finally {
       if (browser) {
-        await browser.close();
+        try {
+          await browser.close();
+        } catch (closeError) {
+          this.logger.warn('Error closing browser:', closeError);
+        }
       }
     }
   }
