@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { HealthModule } from './health/health.module';
 import { ListingModule } from './listing/listing.module';
+import { PdfModule } from './pdf/pdf.module';
 import { SupabaseModule } from 'nestjs-supabase-js';
 import * as dotenv from 'dotenv';
 
@@ -16,6 +17,7 @@ dotenv.config();
     }),
     HealthModule,
     ListingModule,
+    PdfModule,
   ],
   controllers: [AppController],
   providers: [AppService],
