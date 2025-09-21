@@ -15,9 +15,6 @@ import {
   UseInterceptors,
   UploadedFiles,
   BadRequestException,
-  ParseFilePipe,
-  MaxFileSizeValidator,
-  FileTypeValidator,
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
@@ -102,20 +99,17 @@ export class PdfController {
       {
         limits: {
           files: 11,
+          fileSize: 50 * 1024 * 1024, // 50MB per file
+          fieldSize: 50 * 1024 * 1024, // 50MB per field
+          fieldNameSize: 100, // 100 bytes for field names
+          fields: 20, // Max 20 fields
+          parts: 100, // Max 100 parts
         },
       },
     ),
   )
   async mergePdfs(
-    @UploadedFiles(
-      new ParseFilePipe({
-        validators: [
-          new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 500 }), // 500 MB limit
-          new FileTypeValidator({ fileType: 'application/pdf' }), // Allow only PDF files
-        ],
-        fileIsRequired: true,
-      }),
-    )
+    @UploadedFiles()
     files: {
       basePdf?: Express.Multer.File[];
       additionalPdfs?: Express.Multer.File[];
@@ -133,6 +127,20 @@ export class PdfController {
         throw new BadRequestException(
           'At least one additional PDF file is required',
         );
+      }
+
+      if ((files.basePdf[0] as any).mimetype !== 'application/pdf') {
+        throw new BadRequestException(
+          `Base PDF file must be PDF format. Received: ${(files.basePdf[0] as any).mimetype}`,
+        );
+      }
+
+      for (const file of files.additionalPdfs) {
+        if (file.mimetype !== 'application/pdf') {
+          throw new BadRequestException(
+            `All files must be PDF format. Invalid file: ${file.originalname} (${file.mimetype})`,
+          );
+        }
       }
 
       // Process headers - can be sent as JSON string or array
