@@ -91,10 +91,18 @@ export class PdfController {
   @Post('merge')
   @Header('Content-Type', 'application/pdf')
   @UseInterceptors(
-    FileFieldsInterceptor([
-      { name: 'basePdf', maxCount: 1 },
-      { name: 'additionalPdfs', maxCount: 10 }, // Limit to 10 additional PDFs
-    ]),
+    FileFieldsInterceptor(
+      [
+        { name: 'basePdf', maxCount: 1 },
+        { name: 'additionalPdfs', maxCount: 10 },
+      ],
+      {
+        limits: {
+          fileSize: 50 * 1024 * 1024, // 50MB per file
+          files: 11,
+        },
+      },
+    ),
   )
   async mergePdfs(
     @UploadedFiles()
